@@ -1,11 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
-import ImageUpload from './components/ImageUpload';
+import ImageUpload from './components/Image';
+import Image from './components/Image';
 
 function App() {
   return (
     <div className="App">
-        <ImageUpload />
+        <h1>Broken Heart</h1>
+        <br />
+        <Image />
     </div>
   );
 }
