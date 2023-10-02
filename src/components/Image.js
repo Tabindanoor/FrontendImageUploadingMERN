@@ -4,7 +4,7 @@ import axios from 'axios'
 const Image = () => {
 
     const [photos, setPhotos] = useState([]);
-    const [updateUI, setUpdateUI] = useState("");
+    const [updateUI, setUpdateUI] = useState(false);
   
 
     const handleChange = (e) => {
@@ -17,7 +17,8 @@ const Image = () => {
           .post("http://localhost:5000/", formData)
           .then((res) => {
             console.log(res.data);
-            setUpdateUI(res.data._id);
+            // setUpdateUI(res.data._id);
+            setUpdateUI(!updateUI)
           })
           .catch((err) => console.log(err));
       };
@@ -30,7 +31,7 @@ const Image = () => {
             console.log(res.data);
             setPhotos(res.data);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => console.log(err.message,"error in frontend"));
       }, [updateUI]);
   return (
     <div>
@@ -46,8 +47,12 @@ const Image = () => {
       <div className="grid">
         {photos.map(({ photo, _id }) => (
           <div key={_id} className="grid__item">
-            <img
-              src={`http://localhost:5000/${photo}`}
+            {/* <img
+              src={`http://localhost:5000/uploads/${photo}`}
+              alt="grid_image"
+            /> */}
+             <img
+              src={photo}
               alt="grid_image"
             />
           </div>
