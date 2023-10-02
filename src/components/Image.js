@@ -24,15 +24,27 @@ const Image = () => {
       };
 
       
+    // useEffect(() => {
+    //     axios
+    //       .get("http://localhost:5000/")
+    //       .then((res) => {
+    //         console.log(res.data, "res.data ");
+    //         setPhotos(res.data,"photos data");
+    //       })
+    //       .catch((err) => console.log(err.message,"error in frontend"));
+    //   }, [updateUI]);
     useEffect(() => {
-        axios
-          .get("http://localhost:5000/")
-          .then((res) => {
-            console.log(res.data);
-            setPhotos(res.data);
-          })
-          .catch((err) => console.log(err.message,"error in frontend"));
-      }, [updateUI]);
+      axios
+        .get("http://localhost:5000/")
+        .then((res) => {
+          console.log(res.data, "res.data ");
+          setPhotos(res.data); // Update state here
+        })
+        .catch((err) => {
+          console.log(err.message, "error in frontend");
+          // Handle the error here if needed
+        });
+    }, [updateUI]);
   return (
     <div>
         {/* upload image button */}
@@ -47,14 +59,11 @@ const Image = () => {
       <div className="grid">
         {photos.map(({ photo, _id }) => (
           <div key={_id} className="grid__item">
-            {/* <img
+            <img
               src={`http://localhost:5000/uploads/${photo}`}
               alt="grid_image"
-            /> */}
-             <img
-              src={photo}
-              alt="grid_image"
             />
+             
           </div>
         ))}
       </div>
