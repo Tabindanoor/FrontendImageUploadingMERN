@@ -24,15 +24,7 @@ const Image = () => {
       };
 
       
-    // useEffect(() => {
-    //     axios
-    //       .get("http://localhost:5000/")
-    //       .then((res) => {
-    //         console.log(res.data, "res.data ");
-    //         setPhotos(res.data,"photos data");
-    //       })
-    //       .catch((err) => console.log(err.message,"error in frontend"));
-    //   }, [updateUI]);
+  
     useEffect(() => {
       axios
         .get("http://localhost:5000/")
