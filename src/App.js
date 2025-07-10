@@ -6,9 +6,7 @@ import Image from './components/Image';
 function App() {
   return (
     <div className="App">
-        <h1>Broken Heart</h1>
-        <br />
-        <Image />
+    <Image />
     </div>
   );
 }
