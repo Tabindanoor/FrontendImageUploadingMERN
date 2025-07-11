@@ -4,7 +4,8 @@ import './Image.css';
 
 const Image = () => {
   const [photos, setPhotos] = useState([]);
-  
+  const [loading, setLoading] = useState(true);
+
   const [updateUI, setUpdateUI] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null); // 🔸 new state
 
@@ -30,12 +31,20 @@ const Image = () => {
 };
 
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:5000/')
-      .then((res) => setPhotos(res.data))
-      .catch((err) => console.log(err.message));
-  }, [updateUI]);
+ useEffect(() => {
+  setLoading(true); // Start loading
+  axios
+    .get('http://localhost:5000/')
+    .then((res) => {
+      setPhotos(res.data);
+      setLoading(false); // Stop loading
+    })
+    .catch((err) => {
+      console.log(err.message);
+      setLoading(false);
+    });
+}, [updateUI]);
+
 
   return (
     <div className="container">
@@ -50,7 +59,9 @@ const Image = () => {
         accept="image/png, image/jpeg, image/jpg"
         onChange={handleChange}
       />
-
+{loading ? (
+  <p className="text-center text-gray-500 text-lg">Loading images...</p>
+) : (
       <div className="gallery">
         {photos.map(({ photo, _id }) => (
           <div>
@@ -69,6 +80,7 @@ const Image = () => {
           </div>
         ))}
       </div>
+      )}
 
       {/* Modal */}
       {selectedImage && (
